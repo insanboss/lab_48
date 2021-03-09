@@ -1,0 +1,75 @@
+[
+{
+  "model": "product_app.product",
+  "pk": 1,
+  "fields": {
+    "product": "Картошка",
+    "description": "СОчная, мощщная",
+    "categories": "food",
+    "remainder": 1000,
+    "cost": "28.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 2,
+  "fields": {
+    "product": "фен",
+    "description": "хайер дайер",
+    "categories": "household_products",
+    "remainder": 500,
+    "cost": "500.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 3,
+  "fields": {
+    "product": "lawn mower",
+    "description": "we dont use it much",
+    "categories": "garden_staff",
+    "remainder": 400,
+    "cost": "20000.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 4,
+  "fields": {
+    "product": "car",
+    "description": "dodge viper",
+    "categories": "other",
+    "remainder": 2,
+    "cost": "10000.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 5,
+  "fields": {
+    "product": "watermelon",
+    "description": "i love it!!",
+    "categories": "food",
+    "remainder": 1000,
+    "cost": "40.00"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$ceqGg9TW1OnV$G+9NIX/UqHcn22vOlgJAxa8sGRXJk5i4tAGs2P8mHCQ=",
+    "last_login": "2021-03-09T12:19:51.874Z",
+    "is_superuser": true,
+    "username": "insanboss",
+    "first_name": "",
+    "last_name": "",
+    "email": "insanboss@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-03-09T12:14:22.911Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
