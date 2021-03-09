@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block menu %}
+
+
+{% endblock %}
+
+
+{% block content %}
+    <div class=".bg-light">
+        <h1 class="main_title">Продукты</h1>
+
+        {% for product in products %}
+            <div class="guest_card card border-dark mb-5" style="max-width: 18rem;">
+              <div class="card-header">
+                  <span><a href="{% url 'product_view' product.pk %}">{{ product.product }}</a></span>
+              </div>
+              <div class="card-body text-dark">
+                <h5 class="card-title"></h5>
+                    <p class="card-text">Стоимость: {{ product.cost }}</p>
+                    <p class="card-text">Категория: {{ product.get_categories_display }}</p>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
