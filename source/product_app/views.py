@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from product_app.forms import ProductForm
 from product_app.models import Product
+
 
 # Create your views here.
 
@@ -13,6 +16,25 @@ def index_view(request):
 
 
 def product_view(request, pk):
-
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'product_view.html', context={'product': product})
+
+
+def product_create_view(request):
+    if request.method == 'GET':
+        product = ProductForm()
+        return render(request, 'product_create.html', context={'form': product})
+    elif request.method == 'POST':
+        product = ProductForm(data=request.POST)
+        if product.is_valid():
+            product = Product(
+                product=product.cleaned_data.get('product'),
+                description=product.cleaned_data.get('description'),
+                categories=product.cleaned_data.get('categories'),
+                remainder=product.cleaned_data.get('remainder'),
+                cost=product.cleaned_data.get('cost'),
+            )
+            product.save()
+        else:
+            return render(request, 'product_create.html', context={'form': product})
+        return redirect('product_view', pk=product.id)
