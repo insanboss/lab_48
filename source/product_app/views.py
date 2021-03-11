@@ -43,26 +43,26 @@ def product_create_view(request):
 def product_update_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'GET':
-        product = ProductForm(initial={
+        form = ProductForm(initial={
             "product": product.product,
             "description": product.description,
             "categories": product.categories,
             "remainder": product.remainder,
             "cost": product.cost,
         })
-        return render(request, 'product_update.html', context={'form': product, "id": product.id})
+        return render(request, 'product_update.html', context={'form': form, "id": product.id})
     elif request.method == 'POST':
-        product = ProductForm(data=request.POST)
-        if product.is_valid():
-            product.product = product.cleaned_data.get('product')
-            product.description = product.cleaned_data.get('description')
-            product.categories = product.cleaned_data.get('categories')
-            product.remainder = product.cleaned_data.get('remainder')
-            product.cost = product.cleaned_data.get('cost')
+        form = ProductForm(data=request.POST)
+        if form.is_valid():
+            product.product = form.cleaned_data.get('product')
+            product.description = form.cleaned_data.get('description')
+            product.categories = form.cleaned_data.get('categories')
+            product.remainder = form.cleaned_data.get('remainder')
+            product.cost = form.cleaned_data.get('cost')
 
             product.save()
         else:
-            return render(request, 'product_update.html', context={'form': product, "id": product.id})
+            return render(request, 'product_update.html', context={'form': form, "id": product.id})
         return redirect('product_view', pk=product.id)
 
 
