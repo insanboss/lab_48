@@ -7,7 +7,7 @@
     <div>
         <h1>Update product</h1>
 
-        <form method="post" action="{% url "product_update" id %}">
+        <form method="post" action="{% url "product_update" product.id %}">
             {% include "partial/form.html" with button_text="Update" %}
         </form>
     </div>

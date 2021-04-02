@@ -7,6 +7,9 @@
 
 
 {% block content %}
+
+    {% include 'partial/simple_search.html' %}
+
     <div class=".bg-light">
         <h1 class="main_title">Продукты</h1>
 
@@ -23,5 +26,9 @@
             </div>
         {% endfor %}
     </div>
+
+    {% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+    {% endif %}
 
 {% endblock %}

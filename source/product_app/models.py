@@ -13,3 +13,7 @@ class Product(models.Model):
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.product)
+
+
+class Basket(models.Model):
+    quantity = models.PositiveIntegerField(verbose_name='количество продуктов в корзине')
