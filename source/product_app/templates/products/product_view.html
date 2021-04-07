@@ -5,6 +5,8 @@
     <li><a href="{% url 'product_add' %}">Add Product</a></li>
     <li><a href="{% url 'product_update' product.id %}">Product update</a></li>
     <li><a href="{% url 'product_delete' product.id %}">Delete product</a></li>
+    <li><a href="{% url 'basket_add' product.pk %}">Add to basket</a></li>
+
 
 {% endblock menu %}
 

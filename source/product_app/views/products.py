@@ -46,7 +46,7 @@ class IndexProducts(ListView):
         if self.search_value:
             query = Q(product__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
-        return queryset
+        return queryset.order_by('product', 'categories').exclude(remainder=0)
 
 
 class ProductView(DetailView):

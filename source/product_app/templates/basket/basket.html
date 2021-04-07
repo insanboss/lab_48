@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Products in basket available{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>ddddd</h1>
+        <table class="table">
+  <thead>
+  <tr>
+      <th colspan="2">Название продукта</th>
+    <th colspan="2">Стоимость продукта</th>
+    <th colspan="2">Количество продука в корзине</th>
+      <th colspan="2">Сумма</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  {% for basket in baskets %}
+        <tr class="table-active">
+            <td colspan="2" class="table-active">{{ basket.product.product }} <a href="{% url 'remove_product' basket.pk %}"><i class="far fa-trash-alt"></i></a></td>
+            <td colspan="2" class="table-active">{{ basket.product.cost }}</td>
+            <td colspan="2" class="table-active">{{ basket.quantity }}</td>
+            <td colspan="2" class="table-active">{{ basket.get_total }}</td>
+        </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    <h3>{{ total }}</h3>
+
+    <form method="post" action="{% url "make_order" %}">
+            {% include "partial/form.html" with button_text="Order" %}
+        </form>
+    </div>
+{% endblock %}
+
+
+
