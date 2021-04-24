@@ -2,9 +2,18 @@
 
 
 {% block menu %}
-    <li><a href="{% url 'products:product_add' %}">Add Product</a></li>
-    <li><a href="{% url 'products:product_update' product.id %}">Product update</a></li>
-    <li><a href="{% url 'products:product_delete' product.id %}">Delete product</a></li>
+    {% if perms.product_app.add_product %}
+        <li><a href="{% url 'products:product_add' %}">Add Product</a></li>
+    {% endif %}
+    {% if perms.product_app.change_product %}
+        <li><a href="{% url 'products:product_update' product.id %}">Product update</a></li>
+    {% endif %}
+    {% if perms.product_app.delete_product %}
+        <li><a href="{% url 'products:product_delete' product.id %}">Delete product</a></li>
+    {% endif %}
+
+
+
     <li><a href="{% url 'products:basket_add' product.pk %}">Add to basket</a></li>
 
 

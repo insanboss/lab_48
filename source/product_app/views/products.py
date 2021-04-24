@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from product_app.forms import ProductForm, SimpleSearchForm
 from product_app.models import Product
 from django.utils.http import urlencode
@@ -55,29 +55,32 @@ class ProductView(DetailView):
     context_object_name = 'product'
 
 
-class ProductCreate(CreateView):
+class ProductCreate(PermissionRequiredMixin, CreateView):
     model = Product
     template_name = 'products/product_create.html'
     form_class = ProductForm
+    permission_required = 'product_app.add_product'
 
     def get_success_url(self):
         return reverse('products:product_view', kwargs={'pk': self.object.pk})
 
 
-class ProductUpdate(UpdateView):
+class ProductUpdate(PermissionRequiredMixin, UpdateView):
     model = Product
     template_name = 'products/product_update.html'
     form_class = ProductForm
     context_object_name = 'product'
+    permission_required = 'product_app.change_product'
 
     def get_success_url(self):
         return reverse('products:product_view', kwargs={'pk': self.object.pk})
 
 
-class ProductDelete(DeleteView):
+class ProductDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'products/product_delete.html'
     model = Product
     context_object_name = 'product'
     success_url = reverse_lazy('products:index')
+    permission_required = 'product_app.delete_product'
 
 
