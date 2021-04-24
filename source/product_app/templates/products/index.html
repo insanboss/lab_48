@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block menu %}
-    <li><a href="{% url 'product_add' %}">Add Product</a></li>
-    <li><a href="{% url 'basket' %}">Basket</a></li>
+    <li><a href="{% url 'products:product_add' %}">Add Product</a></li>
+    <li><a href="{% url 'products:basket' %}">Basket</a></li>
 
 
 {% endblock %}
@@ -17,8 +17,8 @@
         {% for product in products %}
             <div class="guest_card card border-dark mb-5" style="max-width: 18rem;">
               <div class="card-header">
-                  <span><a href="{% url 'product_view' product.pk %}">{{ product.product }}</a></span>
-                  <span><a href="{% url 'basket_add' product.pk %}"><i class="fas fa-shopping-basket"></i></a></span>
+                  <span><a href="{% url 'products:product_view' product.pk %}">{{ product.product }}</a></span>
+                  <span><a href="{% url 'products:basket_add' product.pk %}"><i class="fas fa-shopping-basket"></i></a></span>
               </div>
               <div class="card-body text-dark">
                 <h5 class="card-title"></h5>

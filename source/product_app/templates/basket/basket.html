@@ -17,7 +17,7 @@
 
   {% for basket in baskets %}
         <tr class="table-active">
-            <td colspan="2" class="table-active">{{ basket.product.product }} <a href="{% url 'remove_product' basket.pk %}"><i class="far fa-trash-alt"></i></a></td>
+            <td colspan="2" class="table-active">{{ basket.product.product }} <a href="{% url 'products:remove_product' basket.pk %}"><i class="far fa-trash-alt"></i></a></td>
             <td colspan="2" class="table-active">{{ basket.product.cost }}</td>
             <td colspan="2" class="table-active">{{ basket.quantity }}</td>
             <td colspan="2" class="table-active">{{ basket.get_total }}</td>
@@ -27,7 +27,7 @@
 </table>
     <h3>{{ total }}</h3>
 
-    <form method="post" action="{% url "make_order" %}">
+    <form method="post" action="{% url "products:make_order" %}">
             {% include "partial/form.html" with button_text="Order" %}
         </form>
     </div>

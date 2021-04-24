@@ -20,7 +20,7 @@ class BasketAdd(View):
                 Basket.objects.create(product=product, quantity=1)
             product.remainder -= 1
             product.save()
-        return redirect('index')
+        return redirect('products:index')
 
 
 class BasketProducts(ListView):
@@ -42,7 +42,7 @@ class BasketProducts(ListView):
 
 class RemoveProduct(DeleteView):
     model = Basket
-    success_url = reverse_lazy('basket')
+    success_url = reverse_lazy('products:basket')
 
     def get(self, request, *args, **kwargs):
         product = self.get_object().product
@@ -54,7 +54,7 @@ class RemoveProduct(DeleteView):
 class MakeOrder(CreateView):
     model = Order
     form_class = User_data
-    success_url = reverse_lazy('basket')
+    success_url = reverse_lazy('products:basket')
 
     def form_valid(self, form):
         order = form.save()

@@ -4,7 +4,7 @@
 {% block content %}
     <div>
         <h1>Create product</h1>
-        <form method="post" action="{% url "product_add" %}">
+        <form method="post" action="{% url "products:product_add" %}">
             {% include "partial/form.html" with button_text="Create" %}
         </form>
     </div>
