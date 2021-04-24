@@ -1,17 +1,6 @@
 [
 {
   "model": "product_app.product",
-  "pk": 1,
-  "fields": {
-    "product": "Картошка",
-    "description": "СОчная, мощщная",
-    "categories": "food",
-    "remainder": 1000,
-    "cost": "28.00"
-  }
-},
-{
-  "model": "product_app.product",
   "pk": 2,
   "fields": {
     "product": "фен",
@@ -23,53 +12,200 @@
 },
 {
   "model": "product_app.product",
-  "pk": 3,
-  "fields": {
-    "product": "lawn mower",
-    "description": "we dont use it much",
-    "categories": "garden_staff",
-    "remainder": 400,
-    "cost": "20000.00"
-  }
-},
-{
-  "model": "product_app.product",
-  "pk": 4,
-  "fields": {
-    "product": "car",
-    "description": "dodge viper",
-    "categories": "other",
-    "remainder": 2,
-    "cost": "10000.00"
-  }
-},
-{
-  "model": "product_app.product",
   "pk": 5,
   "fields": {
     "product": "watermelon",
     "description": "i love it!!",
     "categories": "food",
-    "remainder": 1000,
+    "remainder": 1009,
     "cost": "40.00"
   }
 },
 {
-  "model": "auth.user",
+  "model": "product_app.product",
+  "pk": 6,
+  "fields": {
+    "product": "notebook_1",
+    "description": "any text",
+    "categories": "other",
+    "remainder": 14,
+    "cost": "1000.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 10,
+  "fields": {
+    "product": "Картошка",
+    "description": "adsffds",
+    "categories": "other",
+    "remainder": 123,
+    "cost": "123.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 11,
+  "fields": {
+    "product": "Картошка",
+    "description": "asdasdasd",
+    "categories": "other",
+    "remainder": 12333,
+    "cost": "123.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 12,
+  "fields": {
+    "product": "Картошка",
+    "description": "qweqwe",
+    "categories": "food",
+    "remainder": 122,
+    "cost": "123.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 13,
+  "fields": {
+    "product": "watermelon",
+    "description": "asdasd",
+    "categories": "food",
+    "remainder": 12412,
+    "cost": "12421.00"
+  }
+},
+{
+  "model": "product_app.product",
+  "pk": 14,
+  "fields": {
+    "product": "Картошка",
+    "description": "qwer",
+    "categories": "food",
+    "remainder": 22,
+    "cost": "123.00"
+  }
+},
+{
+  "model": "product_app.basket",
+  "pk": 11,
+  "fields": {
+    "product": 6,
+    "quantity": 6
+  }
+},
+{
+  "model": "product_app.order",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$216000$ceqGg9TW1OnV$G+9NIX/UqHcn22vOlgJAxa8sGRXJk5i4tAGs2P8mHCQ=",
-    "last_login": "2021-03-09T12:19:51.874Z",
-    "is_superuser": true,
-    "username": "insanboss",
-    "first_name": "",
-    "last_name": "",
-    "email": "insanboss@gmail.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2021-03-09T12:14:22.911Z",
-    "groups": [],
-    "user_permissions": []
+    "user_name": "gfhf",
+    "telephone": "eere",
+    "address": "gefe",
+    "created_at": "2021-04-05T14:33:28.407Z"
+  }
+},
+{
+  "model": "product_app.order",
+  "pk": 2,
+  "fields": {
+    "user_name": "gfhf",
+    "telephone": "eere",
+    "address": "gefe",
+    "created_at": "2021-04-05T14:37:16.709Z"
+  }
+},
+{
+  "model": "product_app.order",
+  "pk": 3,
+  "fields": {
+    "user_name": "jutut",
+    "telephone": "ututt",
+    "address": "tut",
+    "created_at": "2021-04-05T14:37:41.873Z"
+  }
+},
+{
+  "model": "product_app.order",
+  "pk": 4,
+  "fields": {
+    "user_name": "gfhf",
+    "telephone": "eere",
+    "address": "gefe",
+    "created_at": "2021-04-07T09:21:37.089Z"
+  }
+},
+{
+  "model": "product_app.order",
+  "pk": 5,
+  "fields": {
+    "user_name": "jutut",
+    "telephone": "1234",
+    "address": "gefe",
+    "created_at": "2021-04-24T10:49:42.581Z"
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 1,
+  "fields": {
+    "product": 12,
+    "order": 2,
+    "quantity": 1
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 2,
+  "fields": {
+    "product": 6,
+    "order": 2,
+    "quantity": 1
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 3,
+  "fields": {
+    "product": 6,
+    "order": 3,
+    "quantity": 2
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 4,
+  "fields": {
+    "product": 5,
+    "order": 3,
+    "quantity": 1
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 5,
+  "fields": {
+    "product": 6,
+    "order": 4,
+    "quantity": 1
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 6,
+  "fields": {
+    "product": 6,
+    "order": 5,
+    "quantity": 2
+  }
+},
+{
+  "model": "product_app.productorder",
+  "pk": 7,
+  "fields": {
+    "product": 14,
+    "order": 5,
+    "quantity": 1
   }
 }
 ]
