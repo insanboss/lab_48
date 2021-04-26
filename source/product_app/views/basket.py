@@ -5,20 +5,24 @@ from django.views.generic.base import View
 
 from product_app.forms import User_data
 from product_app.models import Product, Basket, Order, ProductOrder
+from django.contrib.sessions.models import Session
 
 
 class BasketAdd(View):
 
     def get(self, request, *args, **kwargs):
+        session = request.session.get('basket', [])
         product = get_object_or_404(Product, pk=self.kwargs.get('pk'))
         if product.remainder > 0:
             try:
-                basket = Basket.objects.get(product__pk=product.pk)
+                basket = Basket.objects.get(product__pk=product.pk, pk__in=session)
                 basket.quantity += 1
                 basket.save()
             except Basket.DoesNotExist:
-                Basket.objects.create(product=product, quantity=1)
+                basket = Basket.objects.create(product=product, quantity=1)
+                session.append(basket.pk)
             product.remainder -= 1
+            request.session['basket'] = session
             product.save()
         return redirect('products:index')
 
@@ -28,15 +32,17 @@ class BasketProducts(ListView):
     template_name = 'basket/basket.html'
     context_object_name = 'baskets'
 
+    def get_queryset(self):
+        session = self.request.session.get('basket', [])
+        return Basket.objects.filter(pk__in=session)
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        print(context)
         total = 0
-        for basket in Basket.objects.all():
+        for basket in self.get_queryset():
             total += basket.get_total()
         context['total'] = total
         context['form'] = User_data()
-        print(context)
         return context
 
 
