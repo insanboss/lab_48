@@ -51,8 +51,11 @@ class RemoveProduct(DeleteView):
     success_url = reverse_lazy('products:basket')
 
     def get(self, request, *args, **kwargs):
+        session = request.session.get('basket', [])
         product = self.get_object().product
         product.remainder += self.get_object().quantity
+        session.remove(self.get_object().pk)
+        request.session['basket'] = session
         product.save()
         return super().delete(request)
 
@@ -62,9 +65,15 @@ class MakeOrder(CreateView):
     form_class = User_data
     success_url = reverse_lazy('products:basket')
 
+    def get_queryset(self):
+        session = self.request.session.get('basket', [])
+        return Basket.objects.filter(pk__in=session)
+
     def form_valid(self, form):
         order = form.save()
-        for basket in Basket.objects.all():
+
+        for basket in self.get_queryset():
             ProductOrder.objects.create(order=order, product=basket.product, quantity=basket.quantity)
             basket.delete()
+        self.request.session['basket'] = []
         return super(MakeOrder, self).form_valid(form)
