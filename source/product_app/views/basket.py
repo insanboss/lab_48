@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView
 from django.views.generic.base import View
-
+from django.contrib.auth import get_user_model
 from product_app.forms import User_data
 from product_app.models import Product, Basket, Order, ProductOrder
 from django.contrib.sessions.models import Session
@@ -70,8 +70,11 @@ class MakeOrder(CreateView):
         return Basket.objects.filter(pk__in=session)
 
     def form_valid(self, form):
+        user = self.request.user
         order = form.save()
-
+        if user.is_authenticated:
+            order.user = self.request.user
+        order.save()
         for basket in self.get_queryset():
             ProductOrder.objects.create(order=order, product=basket.product, quantity=basket.quantity)
             basket.delete()

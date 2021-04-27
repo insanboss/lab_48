@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
 # Create your models here.
 category_choices = [('food', 'еда'), ('household_products', 'бытовые товары'), ('garden_staff', 'товары для огорода'),
                     ('other', 'разное')]
@@ -36,6 +36,8 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     product = models.ManyToManyField('product_app.Product', related_name='orders', through='product_app.ProductOrder',
                                   through_fields=('order', 'product'))
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='Order', verbose_name='user',
+                             null=True, blank=True)
 
     def __str__(self):
         return "{}. {}".format(self.created_at, self.user_name)
