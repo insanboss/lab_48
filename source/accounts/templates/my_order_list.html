@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block menu %}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class=".bg-light">
+        <h1 class="main_title">Orders</h1>
+
+        {% for order in orders %}
+            <div class="guest_card card border-dark mb-5" style="max-width: 18rem;">
+              <div class="card-header">
+                  <h3>{{ order.pk }}</h3>
+
+              </div>
+              <div class="card-body text-dark">
+                <h5 class="card-title"></h5>
+                    <p class="card-text">Телефон: {{ order.telephone }}</p>
+                    <p class="card-text">Адрес: {{ order.address }}</p>
+                  <p class="card-text">Дата создания: {{ order.created_at }}</p>
+
+              </div>
+            </div>
+             <table class="table">
+  <thead>
+  <tr>
+      <th colspan="2">Название продукта</th>
+    <th colspan="2">Стоимость продукта</th>
+    <th colspan="2">Количество продука в корзине</th>
+      <th colspan="2">Сумма</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  {% for order_product in order.OrderProduct.all %}
+        <tr class="table-active">
+            <td colspan="2" class="table-active">{{ order_product.product.product }} </td>
+            <td colspan="2" class="table-active">{{ order_product.product.cost }}</td>
+            <td colspan="2" class="table-active">{{ order_product.quantity }}</td>
+            <td colspan="2" class="table-active">{{ order_product.get_total }}</td>
+        </tr>
+  {% endfor %}
+  </tbody>
+</table>
+            <h3> Total:  {{ order.total }}</h3>
+        {% endfor %}
+
+
+
+
+    </div>
+
+
+
+{% endblock %}

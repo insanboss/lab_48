@@ -39,6 +39,14 @@ class Order(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='Order', verbose_name='user',
                              null=True, blank=True)
 
+    def total(self):
+        total = 0
+
+        for product in self.OrderProduct.all():
+            total += product.get_total()
+
+        return total
+
     def __str__(self):
         return "{}. {}".format(self.created_at, self.user_name)
 
@@ -49,6 +57,11 @@ class ProductOrder(models.Model):
     order = models.ForeignKey("product_app.Order", on_delete=models.CASCADE, related_name='OrderProduct',
                                 verbose_name='Заказ')
     quantity = models.IntegerField(verbose_name='количество продуктов в заказе')
+
+    def get_total(self):
+        return self.quantity * self.product.cost
+
+
 
     def __str__(self):
         return "{}. {}".format(self.order, self.product)

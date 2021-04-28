@@ -4,8 +4,8 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
-
-from product_app.models import Product, Basket
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from product_app.models import Product, Basket, Order, ProductOrder
 from .forms import MyUserCreationForm
 
 
@@ -32,9 +32,22 @@ class MyLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         session = self.request.session.get('basket', [])
         baskets = Basket.objects.filter(pk__in=session)
-        print(baskets)
-        for basket in baskets:
-            basket.product.remainder += basket.quantity
-            basket.product.save()
-            basket.delete()
-        return super(MyLogoutView, self).dispatch(request, *args, **kwargs)
+        if baskets:
+            for basket in baskets:
+                basket.product.remainder += basket.quantity
+                basket.product.save()
+                basket.delete()
+            return super(MyLogoutView, self).dispatch(request, *args, **kwargs)
+
+
+class MyOrderList(LoginRequiredMixin, ListView):
+
+    model = Order
+    template_name = 'my_order_list.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=user)
+        return queryset
