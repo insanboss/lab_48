@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     # our apps
     'product_app',
     'accounts',
+    'api_v2',
+
+    # lib apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

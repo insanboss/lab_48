@@ -61,7 +61,5 @@ class ProductOrder(models.Model):
     def get_total(self):
         return self.quantity * self.product.cost
 
-
-
     def __str__(self):
         return "{}. {}".format(self.order, self.product)

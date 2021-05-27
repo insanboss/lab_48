@@ -46,8 +46,12 @@ class MyOrderList(LoginRequiredMixin, ListView):
     template_name = 'my_order_list.html'
     context_object_name = 'orders'
 
-    def get_queryset(self):
-        user = self.request.user
-        queryset = super().get_queryset()
-        queryset = queryset.filter(user=user)
-        return queryset
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     queryset = super().get_queryset()
+    #     queryset = queryset.filter(user=user)
+    #     return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['orders'] = Order.objects.filter(user=self.request.user)
+        return super(MyOrderList, self).get_context_data(**kwargs)
